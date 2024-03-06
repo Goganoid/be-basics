@@ -1,0 +1,71 @@
+doctype html
+html
+  head
+    title Flat List
+    script.
+      function deleteFlats() {
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        if (checkboxes.length === 0) {
+          alert('Please select at least one flat to delete.');
+          return;
+        }
+        if (confirm('Are you sure you want to delete the selected flats?')) {
+          checkboxes.forEach(function(checkbox) {
+            var flatId = checkbox.value;
+            fetch(`/deleteFlat/${flatId}`, { method: 'DELETE' })
+              .then(response => {
+                if (response.ok) {
+                  checkbox.closest('tr').remove();
+                }
+              })
+              .catch(error => console.error('Error deleting flat:', error));
+          });
+        }
+      }
+    style.
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      tr:hover {
+        background-color: #f2f2f2;
+      }
+  body
+    button(onclick="deleteFlats()") Delete Selected Flats
+    div
+      a(href='/create')="Create flat"
+    table
+      thead
+        tr
+          th Id
+          th 
+            a(href='/flats?sortBy=area')="Area"
+          th 
+            a(href='/flats?sortBy=rooms')="Number of Rooms"
+          th 
+            a(href='/flats?sortBy=price')="Price"
+          th Owner
+          th Delete
+      tbody
+        each flat in flats
+          tr
+            td
+              a(href='/editFlat/' + flat.id)= flat.id
+            td= flat.area
+            td= flat.rooms
+            td= flat.price
+            td
+              a(href='/owner/' + flat.owner.id)= flat.owner.name
+            td
+              input(type="checkbox", value=flat.id)

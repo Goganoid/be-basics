@@ -1,0 +1,41 @@
+doctype html
+html
+  head
+    title Flat List
+    style.
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th, td {
+        border: 1px solid #dddddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+      tr:hover {
+        background-color: #f2f2f2;
+      }
+  body
+    table
+      thead
+        tr
+          th Id
+          th Area
+          th Number of Rooms
+          th Price
+          th Owner
+      tbody
+        each flat in flats
+          tr
+            td= flat.id
+            td= flat.area
+            td= flat.rooms
+            td= flat.price
+            td
+              a(href='/owner/' + flat.owner.id)= flat.owner.name

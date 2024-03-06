@@ -1,0 +1,24 @@
+doctype html
+html
+  head
+    title Add Flat Form
+  body
+    h1 Add Flat
+    form(action="/createFlat", method="POST")
+      div
+        label(for="area") Area:
+        input(type="text", name="area", id="area", required)
+      div
+        label(for="rooms") Number of Rooms:
+        input(type="number", name="rooms", id="rooms", required)
+      div
+        label(for="floor") Floor:
+        input(type="number", name="floor", id="floor", required)
+      div
+        label(for="price") Price:
+        input(type="text", name="price", id="price", required)
+      div
+        label(for="ownerId") Owner ID:
+        input(type="text", name="ownerId", id="ownerId", required)
+      div
+        button(type="submit") Add Flat

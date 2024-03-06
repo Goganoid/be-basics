@@ -1,0 +1,18 @@
+doctype html
+html
+  head
+    title Edit Flat
+  body
+    h1 Edit Flat
+    form(action=`/updateFlat/${flat.id}`, method="POST")
+      div
+        label(for="area") Area:
+        input(type="text", name="area", id="area", value=flat.area, required)
+      div
+        label(for="rooms") Number of Rooms:
+        input(type="number", name="rooms", id="rooms", value=flat.rooms, required)
+      div
+        label(for="price") Price:
+        input(type="text", name="price", id="price", value=flat.price, required)
+      div
+        button(type="submit") Update Flat
